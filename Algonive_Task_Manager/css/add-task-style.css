@@ -1,0 +1,595 @@
+/* ===================================
+   TASK MANAGEMENT SYSTEM - DARK THEME
+   Add/Edit Task Page Design
+   =================================== */
+
+/* CSS Variables for Easy Customization */
+:root {
+    --bg-primary: #0a0e27;
+    --bg-secondary: #141b2d;
+    --bg-card: #1a2035;
+    --bg-hover: #252d45;
+    --bg-input: #1f2937;
+    
+    --accent-primary: #6366f1;
+    --accent-secondary: #8b5cf6;
+    --accent-success: #10b981;
+    --accent-warning: #f59e0b;
+    --accent-danger: #ef4444;
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --border-color: #2d3548;
+    --border-focus: #6366f1;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Animated Background Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Page Header */
+header {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+    padding: 25px 50px;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 10;
+    animation: slideDown 0.5s ease-out;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+}
+
+header h1::before {
+    content: '✏️';
+    font-size: 36px;
+    filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.4));
+}
+
+/* Form Section */
+section {
+    max-width: 600px;
+    margin: 35px auto;
+    padding: 0 30px;
+    position: relative;
+    z-index: 10;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Form Container */
+form {
+    background: var(--bg-secondary);
+    padding: 15px 25px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+/* Form Group - Consistent Spacing for Each Field */
+.form-group {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Form Labels */
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-input);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    transition: var(--transition);
+    outline: none;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Input Focus State */
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--border-focus);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Textarea Specific */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* Select Dropdown */
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 45px;
+}
+
+select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 12px;
+}
+
+/* Hidden Input */
+input[type="hidden"] {
+    display: none;
+}
+
+/* Button Container - Right Align with Consistent Spacing */
+.button-group {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+button:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* Save Button */
+button[type="submit"] {
+    background: linear-gradient(135deg, #4f52d1, #7c5dd8);
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    background: linear-gradient(135deg, #5a5dd9, #8b68e0);
+}
+
+/* Cancel Button */
+button[type="button"] {
+    background: rgba(100, 116, 139, 0.15);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+button[type="button"]:hover {
+    background: rgba(100, 116, 139, 0.25);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+/* Link Styles */
+a {
+    text-decoration: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Input Validation States */
+input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--accent-danger);
+}
+
+input:valid:not(:placeholder-shown),
+textarea:valid:not(:placeholder-shown) {
+    border-color: var(--accent-success);
+}
+
+/* Date Input Styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background: var(--bg-hover);
+}
+
+/* Loading State */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+button.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 25px 30px;
+    }
+    
+    header h1 {
+        font-size: 26px;
+    }
+    
+    section {
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+    
+    form {
+        padding: 30px 25px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .button-group a,
+    .button-group button {
+        width: 100%;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 20px 15px;
+    }
+    
+    header h1 {
+        font-size: 22px;
+    }
+    
+    section {
+        padding: 0 15px;
+    }
+    
+    form {
+        padding: 25px 20px;
+    }
+    
+    label {
+        font-size: 13px;
+    }
+    
+    input[type="text"],
+    input[type="date"],
+    textarea,
+    select {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    button {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
+
+/* Focus Styles for Accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #4a5568;
+        --text-secondary: #cbd5e0;
+    }
+    
+    form {
+        border: 2px solid var(--border-color);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-hover);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+/* Form Field Hover Effects */
+input[type="text"]:hover,
+input[type="date"]:hover,
+textarea:hover,
+select:hover {
+    border-color: var(--border-focus);
+    background: var(--bg-card);
+}
+
+/* Success/Error Messages */
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--accent-success);
+    color: var(--accent-success);
+    padding: 15px 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 25px;
+    animation: slideDown 0.4s ease-out;
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--accent-danger);
+    color: var(--accent-danger);
+    padding: 15px 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 25px;
+    animation: slideDown 0.4s ease-out;
+}
+
+
+
+
+/* Button Container Alignment Override */
+form > a[href="index.php"],
+form > button[type="submit"] {
+    margin-top: 20px;
+}
+
+form > a[href="index.php"] {
+    margin-left: auto;
+    display: inline-block;
+}
+
+form > button[type="submit"] {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+/* Reduce space at top of form - first label */
+form > label:first-of-type {
+    margin-top: 0;
+}
+
+/* Reduce spacing between form fields (input to next label) */
+form > input[type="text"],
+form > textarea,
+form > select,
+form > input[type="date"] {
+    margin-bottom: 12px;
+}
+
+/* Keep label to input spacing consistent */
+form > label {
+    margin-top: 0;
+}
+
+/* Strong button alignment fix */
+form {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Clear float after buttons */
+form::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/* Button alignment with proper spacing */
+form > button[type="submit"] {
+    float: right;
+    margin-top: 20px;
+    margin-right: 0;
+}
+
+form > a[href="index.php"] {
+    float: right;
+    margin-top: 20px;
+    margin-right: 12px;
+}
+
+form > a[href="index.php"] button {
+    margin: 0;
+}
